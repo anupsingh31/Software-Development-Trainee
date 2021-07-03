@@ -1,3 +1,6 @@
+//Program to find Armstrong number
+
+
 package com.techlab.demo;
 import java.util.Scanner;
 public class ArmstrongNumber {
