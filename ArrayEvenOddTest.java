@@ -1,3 +1,7 @@
+/* create new class ArrayEvenOddTest.java...............create an array [12,04,13,06,15] ...write a logic to segregate even and odd nos and print it on console seperately*/
+
+
+
 package com.techlab.assignment.test;
 
 public class ArrayEvenOddTest {
