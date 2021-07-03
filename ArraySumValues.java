@@ -1,3 +1,5 @@
+//Write a Java program to sum values of an array.[10,02,01,15,22]
+
 package com.techlab.assignment.test;
 
 public class ArraySumValues {
