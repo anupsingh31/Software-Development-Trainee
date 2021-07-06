@@ -1,3 +1,12 @@
+/*
+Write a program to print following pattern ..
+1234
+123
+12
+1
+*/
+
+
 package com.techlab.demo;
 
 public class PatternTest2 {
