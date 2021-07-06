@@ -9,20 +9,21 @@ public class ArrayEvenOddTest {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int arr[]= {12,04,13,06,15};
-		int j=-1;
 		int n=arr.length;
+		System.out.print("Even Number is : ");
 		for(int i=0;i<n;i++)
 		{
 			if(arr[i]%2==0)
 			{
-				j++;
-				int temp=arr[i];
-				arr[i]=arr[j];
-				arr[j]=temp;
+				System.out.print(arr[i]+" ");
 			}
 		}
+		System.out.println(" ");
+		System.out.print("Odd Number is : ");
 		for(int i :arr)
 		{
+			if(i%2!=0)
+				
 			System.out.print(i+" ");
 		}
 	}
