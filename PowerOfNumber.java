@@ -1,3 +1,5 @@
+//Write a program to calculate power of a number 
+
 package com.techlab.demo;
 
 import java.util.Scanner;
