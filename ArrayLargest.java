@@ -10,20 +10,26 @@ public class ArrayLargest {
 		// TODO Auto-generated method stub
 		int arr[]= {10,56,78,100,34,57};
 		int n=arr.length;
-		for(int i=0;i<2;i++)
+		int firstlarge=arr[0];
+		int secondlarge=arr[1];
+		if(firstlarge<secondlarge)
 		{
-			for(int j=0;j<n-1;j++)
-			{
-				if(arr[j]>arr[j+1])
-				{
-					int temp=arr[j];
-					arr[j]=arr[j+1];
-					arr[j+1]=temp;
-				}
-			}
+			int temp=firstlarge;
+			firstlarge=secondlarge;
+			secondlarge=temp;
 		}
-		System.out.println("First Largest Element is : "+arr[n-1]);
-		System.out.println("First Largest Element is : "+arr[n-2]);
+		for(int i=2;i<n;i++)
+		{
+			if(arr[i]>firstlarge)
+			{
+				secondlarge=firstlarge;
+				firstlarge=arr[i];
+			}
+			else if(arr[i]>secondlarge)
+				secondlarge=arr[i];
+		}
+		System.out.println("First Largest Element is : "+firstlarge);
+		System.out.println("First Largest Element is : "+secondlarge);
 				}
 
 }
