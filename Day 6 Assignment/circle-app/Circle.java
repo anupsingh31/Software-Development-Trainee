@@ -4,7 +4,7 @@ package com.techlab.circle;
 
 public class Circle {
 	private float radius;
-	private String color = "yellow";
+	private String color = "YELLOW";
 
 	public float getradius() {
 		return radius;
@@ -31,8 +31,8 @@ public class Circle {
 
 	}
 
-	public void AreaCircle() {
-		System.out.println("Area of circle is : " + 3.142 * radius * radius);
+	public double AreaCircle() {
+		return (3.142 * radius * radius);
 	}
 
 	public double ParimeterCircle() {
