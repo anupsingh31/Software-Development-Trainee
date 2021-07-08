@@ -9,7 +9,7 @@ public class CircleTest {
 		Circle s=new Circle();
 		s.radius=3.5f;
 		s.color="red";
-		s.diplaydata();
+		s.DisplayData();
 	}
 
 }
