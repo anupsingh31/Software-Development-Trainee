@@ -13,8 +13,8 @@ public class TraingleTest {
 		s.side1=10;
 		s.side2=20;
 		s.side3=15;
-		s.perimeter();
-		s.area();
+		System.out.println("Perimeter of traingle is : "+s.Perimeter());
+		System.out.println("Area of traingle is : "+s.Area());
 		
 		
 	}
