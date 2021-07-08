@@ -22,7 +22,7 @@ public class CircleTest {
 		System.out.println(s.getradius());
 		System.out.println(s.getcolor());
 		s.setradius(6.0f);
-		s.AreaCircle();
+		System.out.println("Area of circle is : "+s.AreaCircle());
 		System.out.println("perimeter of circle is : "+s.ParimeterCircle());
 	}
 
