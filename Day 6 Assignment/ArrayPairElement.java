@@ -32,8 +32,26 @@ public class ArrayPairElement {
 	    }
 	    
 	    */
+		Arrays.sort(arr);
+		int low=0;
+		int high=size-1;
+		while (low < high)
+		  {
+		    if ((arr[low] + arr[high] )== num)
+		    {
+		    System.out.println("( "+arr[low]+","+arr[high]+")");
+		    }
+		    if (arr[low] + arr[high] > num)
+		    {
+		      high--;
+		    }
+		    else
+		    {
+		      low++;
+		    }
+		  }
 	    
-		for(int i=0;i<size-1;i++)
+		/*for(int i=0;i<size-1;i++)
 		{
 			for(int j=i+1;j<size;j++)
 			{
@@ -42,7 +60,7 @@ public class ArrayPairElement {
 					System.out.println("( "+ arr[i]+" , "+arr[j]+" )");
 				}
 			}
-		}
+		}*/
 
 	}
 
