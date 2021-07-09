@@ -1,0 +1,12 @@
+Now make changes in circle-app Create 3 different object of circle and store it in circle array. ..
+Outside main create one method as printCircleInfo( Circle[] c) 
+To print all details of every object
+
+Task2:- create one method outside main () name it as findSmallestCircle(Rectangle[] r)
+This method will compare radius of all circles and will return the object of circle whose radius is smaller
+
+Task 3:-create one method outside main () name it as findBiggestCircleArea(Rectangle[] r)
+This method will compare area of all circles and will return the object of circle whose radius is smaller
+
+
+Task4:- make memory diagram of array of object circle-app
