@@ -38,12 +38,12 @@ public class Circle {
 
 	}
 
-	public double AreaCircle() {
+	/*public double AreaCircle() {
 		return (3.142 * radius * radius);
 	}
 
 	public double ParimeterCircle() {
 		return (2 * 3.142 * radius);
-	}
+	}*/
 
 }
