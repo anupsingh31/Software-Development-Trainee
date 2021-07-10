@@ -9,13 +9,16 @@ public class PlayerTest {
 		Player[] p = new Player[4];
 		Player p1 = new Player(1, "Anupam", 20);
 		p[0] = p1;
+		p[0].whoISElder(p1);
 		Player p2 = new Player(2, "Amit", 21);
 		p[1] = p2;
+		p[0].whoISElder(p2);
 		Player p3 = new Player(3, "sumit", 20);
 		p[2] = p3;
+		p[0].whoISElder(p3);
 		Player p4 = new Player(4, "ankit", 22);
 		p[3] = p4;
-		p4.whoISElder(p);
+		p[0].whoISElder(p4);
 		printPlayerInfo(p);
 	}
 	public static void printPlayerInfo(Player[] info) {
