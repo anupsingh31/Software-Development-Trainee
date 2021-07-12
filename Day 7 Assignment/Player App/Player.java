@@ -6,7 +6,7 @@ public class Player {
 	private int id;
 	private String name;
 	private int age;
-	private int ELDER=0,MAXPLAYER=4;
+	//private int ELDER=0,MAXPLAYER=4;
 	
 	public Player(int id, String name, int age) {
 		this.id = id;
@@ -27,12 +27,18 @@ public class Player {
 	public int getAge() {
 		return age;
 	}
-	public void whoISElder(Player p)
+	public Player whoISElder(Player p)
 	{
-		if(ELDER<p.age)
-		ELDER=p.age;
-		if(MAXPLAYER==p.id)
-		System.out.println("Highest age of player is "+ELDER);
+		
+		if(age<p.age)
+		return p;
+		else
+		{
+			p.age=age;
+			p.name=name;
+			p.id=id;
+			return p;
+		}
 		
 	}
 /*	public void whoISElder(Player[] eld) {
