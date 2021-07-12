@@ -14,7 +14,7 @@ public class Candidate {
 		this.age = age;
 		this.creditpoint = creditpoint;
 
-		System.out.println("Id " + id + " Name " + name + " Age " + age + " CreditPoint " + creditpoint);
+		
 
 	}
 
@@ -36,15 +36,9 @@ public class Candidate {
 		int temp = Integer.parseInt(s);
 		String s1 = creditpoint.toString();
 		int temp1 = Integer.parseInt(s1);
-		if (temp < temp1)
-		{
-			c.id=id;
-			c.name=name;
-			c.age=age;
-			c.creditpoint=creditpoint;
-			return c;
-		}
-		else
+		if (temp < temp1) {
+			return this;
+		} else
 			return c;
 	}
 
