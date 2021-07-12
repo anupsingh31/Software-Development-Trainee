@@ -1,8 +1,8 @@
 package com.techlab.candidate;
 
 public class Candidate {
-	private int DEFAULT;
-	private int MAX = 4, COUNTID = 0;
+	// private int DEFAULT;
+	// private int MAX, COUNTID = 0;
 	private int id;
 	private String name;
 	private int age;
@@ -13,6 +13,7 @@ public class Candidate {
 		this.name = name;
 		this.age = age;
 		this.creditpoint = creditpoint;
+
 		System.out.println("Id " + id + " Name " + name + " Age " + age + " CreditPoint " + creditpoint);
 
 	}
@@ -29,18 +30,26 @@ public class Candidate {
 		return creditpoint;
 	}
 
-	public void whoISBetter(Candidate c) {
-		COUNTID++;
-		String s = c.getCreditPoint().toString();
+	public Candidate whoISBetter(Candidate c) {
+
+		String s = c.creditpoint.toString();
 		int temp = Integer.parseInt(s);
-		if (DEFAULT < temp)
-			DEFAULT = temp;
-		if (COUNTID == MAX)
-			System.out.println("highest creditpoint of candidate is " + DEFAULT);
+		String s1 = creditpoint.toString();
+		int temp1 = Integer.parseInt(s1);
+		if (temp < temp1)
+		{
+			c.id=id;
+			c.name=name;
+			c.age=age;
+			c.creditpoint=creditpoint;
+			return c;
+		}
+		else
+			return c;
 	}
 
 	/*
-	 * public void whoISBetter(Candidate[] c) { String s =
+	 * public void whoISBetter(Candidate[] c)m8iuuuj { String s =
 	 * c[0].getCreditPoint().toString(); int temp = Integer.parseInt(s); for (int i
 	 * = 1; i < c.length; i++) {
 	 * 
