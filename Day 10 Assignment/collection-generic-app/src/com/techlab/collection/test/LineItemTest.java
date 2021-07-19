@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.techlab.collection.LineItem;
 
 public class LineItemTest {
-
+	private static double TotalAmount=0.0;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ArrayList<LineItem> cart = new ArrayList<LineItem>();
@@ -20,8 +20,10 @@ public class LineItemTest {
 			System.out.println("Id " + cart.get(i).getId() + " Name " + cart.get(i).getName() + " UnitPrice "
 					+ cart.get(i).getUnitPrice() + " Quantity " + cart.get(i).getQuantity() + " TotalPrice "
 					+ cart.get(i).calculateTotalCartPrice());
+			TotalAmount+=cart.get(i).calculateTotalCartPrice();
 			// System.out.println(cart.get(i).toString());
 
 		}
+		System.out.println("Total :  "+TotalAmount);
 	}
 }
