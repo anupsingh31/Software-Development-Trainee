@@ -1,11 +1,30 @@
 package com.techlab.tic.tac.toe;
-
+import java.util.*;
 public class ResultAnalayzer  {
-	public static Mark turn;
+	public Mark turn;
 	private static int MIN_VAL=0;
 	private static int MAX_VAL=8;
-
-	public static Result checkWinner()
+	public static int Moves=0;
+	private int row,column;
+	
+	public int getMin_Val() {
+		return MIN_VAL;
+	}
+	
+	public int getMax_Val()
+	{
+		return MAX_VAL;
+	}
+	
+	public static String getChar(String board) {
+		if (board == Mark.X.toString())
+			return "X"; 
+			else if (board == Mark.O.toString())
+			return "O"; 
+			else
+			return " ";
+	}
+	public Result checkWinner(int row, int column)
 	{
 		for(int i=MIN_VAL;i<MAX_VAL;i++)
 		{
@@ -13,28 +32,28 @@ public class ResultAnalayzer  {
 			switch(i)
 			{
 			case 0:
-				check=Board.board[0]+Board.board[1]+Board.board[2];
+				check=getChar(Board.board[0][0])+getChar(Board.board[0][1])+getChar(Board.board[0][2]);
 				break;
 			case 1:
-				check=Board.board[3]+Board.board[4]+Board.board[5];
+				check=getChar(Board.board[1][0])+getChar(Board.board[1][1])+getChar(Board.board[1][2]);
 				break;
 			case 2:
-				check=Board.board[6]+Board.board[7]+Board.board[8];
+				check=getChar(Board.board[2][0])+getChar(Board.board[2][1])+getChar(Board.board[2][2]);
 				break;
 			case 3:
-				check=Board.board[0]+Board.board[3]+Board.board[6];
+				check=getChar(Board.board[0][0])+getChar(Board.board[1][1])+getChar(Board.board[2][2]);
 				break;
 			case 4:
-				check=Board.board[1]+Board.board[4]+Board.board[7];
+				check=getChar(Board.board[0][2])+getChar(Board.board[1][1])+getChar(Board.board[2][0]);
 				break;
 			case 5:
-				check=Board.board[2]+Board.board[5]+Board.board[8];
+				check=getChar(Board.board[0][0])+getChar(Board.board[1][0])+getChar(Board.board[2][0]);
 				break;
 			case 6:
-				check=Board.board[0]+Board.board[4]+Board.board[8];
+				check=getChar(Board.board[0][1])+getChar(Board.board[1][1])+getChar(Board.board[2][1]);
 				break;
 			case 7:
-				check=Board.board[2]+Board.board[4]+Board.board[6];
+				check=getChar(Board.board[0][2])+getChar(Board.board[1][2])+getChar(Board.board[2][2]);
 				break;
 			}
 			//System.out.println(check);
@@ -48,15 +67,20 @@ public class ResultAnalayzer  {
                 return Result.WIN;
 			}
 		}
-		for (int a = MIN_VAL; a <= MAX_VAL; a++) {
-            if (Board.board[a]=="-") {
-                break;
-            }
-            else if (a == MAX_VAL) {
+		
+		for(row=0;row<3;row++)
+		{
+			for(column=0;column<3;column++)
+			{
+				if(Board.board[row][column]=="-")
+					return Result.NULL;
+			}
+		}
+             if ((row*column)-1 == MAX_VAL) {
                 return Result.DRAW;
             }
-	}
 	
+	System.out.println(Moves);
 	        return Result.NULL;
 }
 }
