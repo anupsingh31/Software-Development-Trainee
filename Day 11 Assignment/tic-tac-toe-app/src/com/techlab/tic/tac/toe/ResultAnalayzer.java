@@ -1,21 +1,12 @@
 package com.techlab.tic.tac.toe;
 
 public class ResultAnalayzer {
-	private int MIN_VAL = 0;
-	private int MAX_VAL = 8;
+
 	public int Moves = 0;
 	private Board board;
 
 	public ResultAnalayzer(Board board) {
 		this.board = board;
-	}
-
-	public int getMin_Val() {
-		return MIN_VAL;
-	}
-
-	public int getMax_Val() {
-		return MAX_VAL;
 	}
 
 	public static String getChar(String board) {
@@ -30,14 +21,17 @@ public class ResultAnalayzer {
 	public Result CheckWinner(Mark type, int row, int column) {
 		if (checkRows(type, row))
 			return Result.WIN;
+
 		if (checkColumns(type, column))
 			return Result.WIN;
+
 		if (checkDiagonal(type, row, column))
 			return Result.WIN;
+
 		if (checkReverseDiagonal(type, row, column))
 			return Result.WIN;
-		
-		if (Moves - 1 == MAX_VAL) {
+
+		if (Moves  == (board.getSize()*board.getSize())) {
 			return Result.DRAW;
 		}
 
@@ -81,7 +75,7 @@ public class ResultAnalayzer {
 	private boolean checkReverseDiagonal(Mark type, int row, int column) {
 		for (int k = 0; k < board.getSize(); k++) {
 			for (int j = 0; j < board.getSize(); j++) {
-				if (k + j == (board.getSize()-1)) {
+				if (k + j == (board.getSize() - 1)) {
 					if (!(getChar(Board.board[k][j]) == getChar(type.toString()))) {
 						return false;
 					}

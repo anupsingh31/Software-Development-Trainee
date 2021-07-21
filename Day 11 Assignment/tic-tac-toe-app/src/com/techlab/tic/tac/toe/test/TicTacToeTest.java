@@ -11,17 +11,22 @@ import com.techlab.tic.tac.toe.ResultAnalayzer;
 public class TicTacToeTest {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
 		Board board = new Board(3);
+
 		Scanner sc = new Scanner(System.in);
-		ResultAnalayzer ra = new ResultAnalayzer(board);
-		Mark turn;
-		turn = Mark.X;
+
+		ResultAnalayzer analyze = new ResultAnalayzer(board);
+
+		Mark turn = Mark.X;
+
 		Result winner = Result.INPROGRESS;
 
 		System.out.println("Intial stage output");
+
 		printBoard();
-		int count = 0;
+
+		int count = 0, Min_Val=0, Max_Val=9;
 
 		while (winner.equals(Result.INPROGRESS)) {
 			System.out.print("Enter the PlayerName : ");
@@ -32,10 +37,12 @@ public class TicTacToeTest {
 				System.out.println("Player2");
 				count++;
 			}
-			int numInput;
+
+			int positionofBoard;
+
 			try {
-				numInput = sc.nextInt();
-				if (!(numInput > ra.getMin_Val() && numInput <= ra.getMax_Val() + 1)) {
+				positionofBoard = sc.nextInt();
+				if (!(positionofBoard > Min_Val && positionofBoard <= Max_Val)) {
 					System.out.println("Invalid input; re-enter slot number:");
 					continue;
 				}
@@ -43,22 +50,23 @@ public class TicTacToeTest {
 				System.out.println("Invalid input; re-enter slot number:");
 				continue;
 			}
-			int row = board.getRow(numInput);
-			int column = board.getColumn(numInput);
+
+			int row = board.getRow(positionofBoard);
+			int column = board.getColumn(positionofBoard);
 
 			if (Board.board[row][column] == "-") {
 				Board.board[row][column] = turn.toString();
-				ra.Moves++;
+				analyze.Moves++;
 				if (turn.equals(Mark.X)) {
 					printBoard();
-					if (ra.Moves >= 5) {
-						winner = ra.CheckWinner(turn, row, column);
+					if (analyze.Moves >= 5) {
+						winner = analyze.CheckWinner(turn, row, column);
 					}
 					turn = Mark.O;
 				} else {
 					printBoard();
-					if (ra.Moves >= 5) {
-						winner = ra.CheckWinner(turn, row, column);
+					if (analyze.Moves >= 5) {
+						winner = analyze.CheckWinner(turn, row, column);
 					}
 					turn = Mark.X;
 
@@ -68,15 +76,16 @@ public class TicTacToeTest {
 				count--;
 			}
 		}
-		if (winner.equals(Result.DRAW)) {
+
+		if (winner.equals(Result.DRAW))
 			System.out.println("It's a draw! Thanks for playing.");
-		} else {
-			if (count % 2 == 0)
-				System.out.println("Player2 " + Result.WIN);
-			else
-				System.out.println("Player1 " + Result.WIN);
-		}
+		else if (count % 2 == 0)
+			System.out.println("Player2 " + Result.WIN);
+		else
+			System.out.println("Player1 " + Result.WIN);
+
 		sc.close();
+
 	}
 
 	public static void printBoard() {
