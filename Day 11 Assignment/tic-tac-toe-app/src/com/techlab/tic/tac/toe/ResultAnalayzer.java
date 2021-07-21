@@ -1,10 +1,9 @@
 package com.techlab.tic.tac.toe;
 
 public class ResultAnalayzer {
-	public Mark turn;
-	private static int MIN_VAL = 0;
-	private static int MAX_VAL = 8;
-	public static int Moves = 0;
+	private int MIN_VAL = 0;
+	private int MAX_VAL = 8;
+	public int Moves = 0;
 	private Board board;
 
 	public ResultAnalayzer(Board board) {
@@ -37,13 +36,8 @@ public class ResultAnalayzer {
 			return Result.WIN;
 		if (checkReverseDiagonal(type, row, column))
 			return Result.WIN;
-		for (row = 0; row < board.getSize(); row++) {
-			for (column = 0; column < board.getSize(); column++) {
-				if (Board.board[row][column] == "-")
-					return Result.INPROGRESS;
-			}
-		}
-		if ((row * column) - 1 == MAX_VAL) {
+		
+		if (Moves - 1 == MAX_VAL) {
 			return Result.DRAW;
 		}
 

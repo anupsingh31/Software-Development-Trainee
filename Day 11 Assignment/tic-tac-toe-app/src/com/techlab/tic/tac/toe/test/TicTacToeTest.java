@@ -15,8 +15,8 @@ public class TicTacToeTest {
 		Board board = new Board(3);
 		Scanner sc = new Scanner(System.in);
 		ResultAnalayzer ra = new ResultAnalayzer(board);
-
-		ra.turn = Mark.X;
+		Mark turn;
+		turn = Mark.X;
 		Result winner = Result.INPROGRESS;
 
 		System.out.println("Intial stage output");
@@ -47,20 +47,20 @@ public class TicTacToeTest {
 			int column = board.getColumn(numInput);
 
 			if (Board.board[row][column] == "-") {
-				Board.board[row][column] = ra.turn.toString();
-				ResultAnalayzer.Moves++;
-				if (ra.turn.equals(Mark.X)) {
+				Board.board[row][column] = turn.toString();
+				ra.Moves++;
+				if (turn.equals(Mark.X)) {
 					printBoard();
-					if (ResultAnalayzer.Moves >= 5) {
-						winner = ra.CheckWinner(ra.turn, row, column);
+					if (ra.Moves >= 5) {
+						winner = ra.CheckWinner(turn, row, column);
 					}
-					ra.turn = Mark.O;
+					turn = Mark.O;
 				} else {
 					printBoard();
-					if (ResultAnalayzer.Moves >= 5) {
-						winner = ra.CheckWinner(ra.turn, row, column);
+					if (ra.Moves >= 5) {
+						winner = ra.CheckWinner(turn, row, column);
 					}
-					ra.turn = Mark.X;
+					turn = Mark.X;
 
 				}
 			} else {
