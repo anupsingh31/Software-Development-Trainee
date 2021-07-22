@@ -31,7 +31,7 @@ public class ResultAnalayzer {
 		if (checkReverseDiagonal(type, row, column))
 			return Result.WIN;
 
-		if (Moves  == (board.getSize()*board.getSize())) {
+		if (Moves == (board.getSize() * board.getSize())) {
 			return Result.DRAW;
 		}
 

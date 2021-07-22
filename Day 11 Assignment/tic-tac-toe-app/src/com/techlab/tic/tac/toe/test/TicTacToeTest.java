@@ -26,28 +26,31 @@ public class TicTacToeTest {
 
 		printBoard();
 
-		int count = 0, Min_Val=0, Max_Val=9;
+		int count = 0, Min_Val = 0, Max_Val = 9;
 
 		while (winner.equals(Result.INPROGRESS)) {
 			System.out.print("Enter the PlayerName : ");
 			if (count % 2 == 0) {
-				System.out.println("Player1");
+				System.out.print("Player1");
 				count++;
 			} else {
-				System.out.println("Player2");
+				System.out.print("Player2");
 				count++;
 			}
-
+			System.out.println(" enter position");
 			int positionofBoard;
-
+			
 			try {
 				positionofBoard = sc.nextInt();
 				if (!(positionofBoard > Min_Val && positionofBoard <= Max_Val)) {
-					System.out.println("Invalid input; re-enter slot number:");
+					System.err.println("Invalid input; re-enter slot number:");
+					count--;
 					continue;
 				}
 			} catch (InputMismatchException e) {
-				System.out.println("Invalid input; re-enter slot number:");
+				System.err.println("Invalid input; re-enter slot number:");
+				count--;
+				sc.nextLine();
 				continue;
 			}
 
