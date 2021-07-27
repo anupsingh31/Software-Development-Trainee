@@ -2,14 +2,22 @@ package com.techlab.tic.tac.toe;
 
 public class ResultAnalayzer {
 
-	public int Moves = 0;
+	private int Moves;
 	private Board board;
 
 	public ResultAnalayzer(Board board) {
 		this.board = board;
 	}
 
-	public static String getChar(String board) {
+	public int getMoves() {
+		return Moves;
+	}
+
+	public void setMoves(int moves) {
+		this.Moves = moves;
+	}
+
+	public String getChar(String board) {
 		if (board == Mark.X.toString())
 			return "X";
 		else if (board == Mark.O.toString())
@@ -25,10 +33,10 @@ public class ResultAnalayzer {
 		if (checkColumns(type, column))
 			return Result.WIN;
 
-		if (checkDiagonal(type, row, column))
+		if (checkReverseDiagonal(type))
 			return Result.WIN;
 
-		if (checkReverseDiagonal(type, row, column))
+		if (checkDiagonal(type))
 			return Result.WIN;
 
 		if (Moves == (board.getSize() * board.getSize())) {
@@ -58,21 +66,19 @@ public class ResultAnalayzer {
 
 	}
 
-	private boolean checkDiagonal(Mark type, int row, int column) {
-		for (int k = 0; k < board.getSize(); k++) {
-			for (int j = 0; j < board.getSize(); j++) {
-				if (k == j) {
-					if (!(getChar(Board.board[k][j]) == getChar(type.toString()))) {
-						return false;
-					}
-				}
+	private boolean checkDiagonal(Mark type) {
+		int k = 0;
+		while (k < board.getSize()) {
+			if (!(getChar(Board.board[k][k]) == getChar(type.toString()))) {
+				return false;
 			}
+			k++;
 		}
 		return true;
 
 	}
 
-	private boolean checkReverseDiagonal(Mark type, int row, int column) {
+	private boolean checkReverseDiagonal(Mark type) {
 		for (int k = 0; k < board.getSize(); k++) {
 			for (int j = 0; j < board.getSize(); j++) {
 				if (k + j == (board.getSize() - 1)) {

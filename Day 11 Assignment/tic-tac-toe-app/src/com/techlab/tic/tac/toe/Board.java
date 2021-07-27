@@ -1,6 +1,7 @@
 package com.techlab.tic.tac.toe;
 
 public class Board {
+	//Mark turn = Mark.X;
 	private int size;
 	public static String[][] board = new String[3][3];
 
@@ -21,6 +22,18 @@ public class Board {
 				board[i][j] = "-";
 			}
 		}
+	}
+
+	public boolean setGrid(Mark turn,int positionofBoard) {
+		int row = getRow(positionofBoard);
+		int column = getColumn(positionofBoard);
+		if (Board.board[row][column] == "-") {
+			Board.board[row][column] = turn.toString();
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 	public int getRow(int grid) {

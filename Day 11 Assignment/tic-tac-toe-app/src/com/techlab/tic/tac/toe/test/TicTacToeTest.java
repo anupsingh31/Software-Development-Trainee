@@ -1,14 +1,17 @@
 package com.techlab.tic.tac.toe.test;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.techlab.tic.tac.toe.Board;
+import com.techlab.tic.tac.toe.CustomException;
 import com.techlab.tic.tac.toe.Mark;
 import com.techlab.tic.tac.toe.Result;
 import com.techlab.tic.tac.toe.ResultAnalayzer;
 
 public class TicTacToeTest {
+	static int count = 0, Min_Val = 0, Max_Val = 9;
+	static String Player1 = "", Player2 = "";
+	static int positionofBoard;
 
 	public static void main(String[] args) {
 
@@ -22,12 +25,12 @@ public class TicTacToeTest {
 
 		Result winner = Result.INPROGRESS;
 
+		CustomException cs = new CustomException();
+
 		System.out.println("Intial stage output");
 
 		printBoard();
 
-		int count = 0, Min_Val = 0, Max_Val = 9;
-		String Player1 = "", Player2 = "";
 		while (winner.equals(Result.INPROGRESS)) {
 			if (Player1.isEmpty()) {
 				System.out.println("Enter the Player1 Name : ");
@@ -44,55 +47,27 @@ public class TicTacToeTest {
 				System.out.println(Player2);
 				count++;
 			}
-			int positionofBoard;
-
 			try {
 				positionofBoard = sc.nextInt();
-				if (!(positionofBoard > Min_Val && positionofBoard <= Max_Val)) {
-					System.err.println("Invalid input; re-enter slot number:");
-					count--;
-					continue;
-				}
-			} catch (InputMismatchException e) {
-				System.err.println("Invalid input; re-enter slot number:");
-				count--;
-				sc.nextLine();
+				cs.validate(positionofBoard);
+			} catch (Exception e) {
+				System.err.println(e);
 				continue;
 			}
+			boolean mark = board.setGrid(turn, positionofBoard);
+			if (mark) {
+				analyze.setMoves(count);
+				printBoard();
+				winner = checkwinner(analyze, winner, board, turn);
+				turn = mark(turn);
 
-			int row = board.getRow(positionofBoard);
-			int column = board.getColumn(positionofBoard);
-
-			if (Board.board[row][column] == "-") {
-				Board.board[row][column] = turn.toString();
-				analyze.Moves++;
-				if (turn.equals(Mark.X)) {
-					printBoard();
-					if (analyze.Moves >= 5) {
-						winner = analyze.CheckWinner(turn, row, column);
-					}
-					turn = Mark.O;
-				} else {
-					printBoard();
-					if (analyze.Moves >= 5) {
-						winner = analyze.CheckWinner(turn, row, column);
-					}
-					turn = Mark.X;
-
-				}
 			} else {
 				System.out.println("Slot already taken; re-enter slot number:");
 				count--;
 			}
+
 		}
-
-		if (winner.equals(Result.DRAW))
-			System.out.println("It's a draw! Thanks for playing.");
-		else if (count % 2 == 0)
-			System.out.println(Player2 + "  " + Result.WIN);
-		else
-			System.out.println(Player1 + "  " + Result.WIN);
-
+		Desicion(winner);
 		sc.close();
 
 	}
@@ -104,6 +79,29 @@ public class TicTacToeTest {
 
 			System.out.println();
 		}
+	}
+
+	public static void Desicion(Result winner) {
+		if (winner.equals(Result.DRAW))
+			System.out.println("It's a draw! Thanks for playing.");
+		else if (count % 2 == 0)
+			System.out.println(Player2 + "  " + Result.WIN);
+		else
+			System.out.println(Player1 + "  " + Result.WIN);
+	}
+
+	public static Result checkwinner(ResultAnalayzer analyze, Result winner, Board board, Mark turn) {
+		if (analyze.getMoves() >= 5) {
+			winner = analyze.CheckWinner(turn, board.getRow(positionofBoard), board.getColumn(positionofBoard));
+		}
+		return winner;
+	}
+
+	public static Mark mark(Mark turn) {
+		if (turn.equals(Mark.X)) {
+			return Mark.O;
+		}
+		return Mark.X;
 	}
 
 }
