@@ -54,7 +54,9 @@ public class TicTacToeTest {
 				System.err.println(e);
 				continue;
 			}
+
 			boolean mark = board.setGrid(turn, positionofBoard);
+
 			if (mark) {
 				analyze.setMoves(count);
 				printBoard();
@@ -65,8 +67,8 @@ public class TicTacToeTest {
 				System.out.println("Slot already taken; re-enter slot number:");
 				count--;
 			}
-
 		}
+
 		Desicion(winner);
 		sc.close();
 

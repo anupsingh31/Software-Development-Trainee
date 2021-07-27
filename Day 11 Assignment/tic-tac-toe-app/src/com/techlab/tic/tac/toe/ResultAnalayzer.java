@@ -79,17 +79,15 @@ public class ResultAnalayzer {
 	}
 
 	private boolean checkReverseDiagonal(Mark type) {
-		for (int k = 0; k < board.getSize(); k++) {
-			for (int j = 0; j < board.getSize(); j++) {
-				if (k + j == (board.getSize() - 1)) {
-					if (!(getChar(Board.board[k][j]) == getChar(type.toString()))) {
-						return false;
-					}
-				}
+		int k = 0, j = board.getSize() - 1;
+		while (k < board.getSize()) {
+			if (!(getChar(Board.board[k][j]) == getChar(type.toString()))) {
+				return false;
 			}
+			k++;
+			j--;
 		}
 		return true;
-
 	}
 
 }
