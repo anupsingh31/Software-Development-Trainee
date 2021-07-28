@@ -1,13 +1,13 @@
 package com.techlab.tic.tac.toe;
 
 public class Board {
-	// Mark turn = Mark.X;
+
 	private int size;
-	public static String[][] board = new String[3][3];
+	public static String[][] board;
 
 	public Board(int size) {
-
 		this.size = size;
+		board = new String[size][size];
 		generateGrid();
 	}
 
@@ -37,19 +37,16 @@ public class Board {
 	}
 
 	public int getRow(int grid) {
-		if (grid > 3 && grid <= 6)
-			return 1;
-		if (grid > 6 && grid <= 9)
-			return 2;
-		return 0;
-
+		if (grid % size == 0) {
+			return (grid / size) - 1;
+		}
+		return grid / size;
 	}
 
 	public int getColumn(int grid) {
-		if (grid % size == 1)
-			return 0;
-		if (grid % size == 2)
-			return 1;
-		return 2;
+		if (grid % size == 0) {
+			return size - 1;
+		}
+		return (grid % size) - 1;
 	}
 }

@@ -9,15 +9,25 @@ import com.techlab.tic.tac.toe.Result;
 import com.techlab.tic.tac.toe.ResultAnalayzer;
 
 public class TicTacToeTest {
-	static int count = 0, Min_Val = 0, Max_Val = 9;
-	static String Player1 = "", Player2 = "";
-	static int positionofBoard;
 
 	public static void main(String[] args) {
-
-		Board board = new Board(3);
-
 		Scanner sc = new Scanner(System.in);
+		CustomException cs = new CustomException();
+		int size;
+		while (true) {
+			System.out.println("Enter the size of Board ");
+			try {
+				size = sc.nextInt();
+				cs.board(size);
+				break;
+
+			} catch (Exception e) {
+				System.out.println(e);
+
+			}
+		}
+
+		Board board = new Board(size);
 
 		ResultAnalayzer analyze = new ResultAnalayzer(board);
 
@@ -25,12 +35,11 @@ public class TicTacToeTest {
 
 		Result winner = Result.INPROGRESS;
 
-		CustomException cs = new CustomException();
-
 		System.out.println("Intial stage output");
 
-		printBoard();
-
+		printBoard(board.getSize());
+		int count = 0;
+		String Player1 = "", Player2 = "";
 		while (winner.equals(Result.INPROGRESS)) {
 			if (Player1.isEmpty()) {
 				System.out.println("Enter the Player1 Name : ");
@@ -42,48 +51,51 @@ public class TicTacToeTest {
 			System.out.print("Enter Position : ");
 			if (count % 2 == 0) {
 				System.out.println(Player1);
-				count++;
 			} else {
 				System.out.println(Player2);
-				count++;
 			}
+			int positionofBoard;
 			try {
 				positionofBoard = sc.nextInt();
+				count++;
 				cs.validate(positionofBoard);
 			} catch (Exception e) {
 				System.err.println(e);
+				count--;
 				continue;
 			}
 
 			boolean mark = board.setGrid(turn, positionofBoard);
 
-			if (mark) {
+			try {
+				cs.slot(mark);
 				analyze.setMoves(count);
-				printBoard();
-				winner = checkwinner(analyze, winner, board, turn);
+				printBoard(board.getSize());
+				winner = checkwinner(analyze, winner, board, turn, positionofBoard);
 				turn = mark(turn);
 
-			} else {
-				System.out.println("Slot already taken; re-enter slot number:");
+			} catch (Exception ec) {
+				System.err.println(ec);
 				count--;
+				continue;
 			}
 		}
 
-		Desicion(winner);
+		Desicion(winner, count, Player1, Player2);
 		sc.close();
 
 	}
 
-	public static void printBoard() {
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++)
+	public static void printBoard(int size) {
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++)
 				System.out.print(Board.board[i][j] + " ");
 
 			System.out.println();
 		}
 	}
 
-	public static void Desicion(Result winner) {
+	public static void Desicion(Result winner, int count, String Player1, String Player2) {
 		if (winner.equals(Result.DRAW))
 			System.out.println("It's a draw! Thanks for playing.");
 		else if (count % 2 == 0)
@@ -92,7 +104,8 @@ public class TicTacToeTest {
 			System.out.println(Player1 + "  " + Result.WIN);
 	}
 
-	public static Result checkwinner(ResultAnalayzer analyze, Result winner, Board board, Mark turn) {
+	public static Result checkwinner(ResultAnalayzer analyze, Result winner, Board board, Mark turn,
+			int positionofBoard) {
 		if (analyze.getMoves() >= 5) {
 			winner = analyze.CheckWinner(turn, board.getRow(positionofBoard), board.getColumn(positionofBoard));
 		}
