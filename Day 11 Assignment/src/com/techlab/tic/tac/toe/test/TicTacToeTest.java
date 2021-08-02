@@ -5,7 +5,6 @@ import java.util.Scanner;
 import com.techlab.tic.tac.toe.Board;
 import com.techlab.tic.tac.toe.CustomException;
 import com.techlab.tic.tac.toe.Game;
-import com.techlab.tic.tac.toe.InvalidBoardSizeException;
 import com.techlab.tic.tac.toe.Mark;
 import com.techlab.tic.tac.toe.Player;
 import com.techlab.tic.tac.toe.Result;
@@ -41,6 +40,8 @@ public class TicTacToeTest {
 
 		Result status = Result.INPROGRESS;
 
+		Game game = new Game(player, board, analyze);
+
 		System.out.println("Intial stage output");
 
 		printBoard(board.getSize());
@@ -70,8 +71,9 @@ public class TicTacToeTest {
 				System.err.println(e);
 				continue;
 			}
+
 			count++;
-			Game game = new Game(player, positionofBoard, count, status, board, analyze);
+			game.Play(count, positionofBoard);
 
 			if (count == analyze.getMoves() + 1) {
 				count = analyze.getMoves();

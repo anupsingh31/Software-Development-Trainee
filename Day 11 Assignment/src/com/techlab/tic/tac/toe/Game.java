@@ -6,21 +6,19 @@ public class Game {
 	private ResultAnalayzer analyze;
 	private Mark turn;
 	private Player[] player;
-	private Result status;
 	private int moves;
 	private int positionofBoard;
 
-	public Game(Player[] player, int positionofBoard, int count, Result status, Board board, ResultAnalayzer analyze) {
+	public Game(Player[] player, Board board, ResultAnalayzer analyze) {
 		this.player = player;
-		this.positionofBoard = positionofBoard;
-		this.moves = count;
-		this.status = status;
 		this.board = board;
 		this.analyze = analyze;
-		Play();
 	}
 
-	private void Play() {
+	public void Play(int count, int positionofBoard) {
+		this.moves = count;
+		this.positionofBoard = positionofBoard;
+
 		try {
 			if (moves % 2 != 0) {
 				board.setGrid(player[0].getAssignMark(), positionofBoard);
@@ -41,10 +39,10 @@ public class Game {
 	}
 
 	public Result getStatus() {
-		if (analyze.getMoves() >= 2 * board.getSize() + 1) {
-			status = analyze.CheckWinner(turn, board.getRow(positionofBoard), board.getColumn(positionofBoard));
+		if (analyze.getMoves() >= board.getSize() + 1) {
+			return analyze.CheckWinner(turn, board.getRow(positionofBoard), board.getColumn(positionofBoard));
 		}
-		return status;
+		return Result.INPROGRESS;
 	}
 
 }
