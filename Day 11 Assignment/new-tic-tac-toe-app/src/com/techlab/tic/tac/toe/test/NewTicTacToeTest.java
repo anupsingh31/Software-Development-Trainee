@@ -1,5 +1,6 @@
 package com.techlab.tic.tac.toe.test;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.techlab.tic.tac.toe.Board;
@@ -32,46 +33,47 @@ public class NewTicTacToeTest {
 		Board board = new Board(size);
 
 		ResultAnalayzer analyze = new ResultAnalayzer(board);
-		Player[] player = new Player[2];
 
-		player[0] = new Player(null, Mark.X);
-
-		player[1] = new Player(null, Mark.O);
-
+		ArrayList<Player> playerData = new ArrayList<Player>();
+		Player player;
 		Result status = Result.INPROGRESS;
 
-		Game game = new Game(player, board, analyze);
+		Game game = new Game(board, analyze);
 
 		System.out.println("Intial stage output");
 
 		printBoard(board.getSize());
+
 		int count = 0;
 
 		while (status.equals(Result.INPROGRESS)) {
-			if (player[0].getPlayerName() == null) {
+			if (playerData.isEmpty()) {
 				System.out.println("Enter the Player1 Name : ");
-				player[0].setPlayerName(sc.next());
-			} else if (player[1].getPlayerName() == null && count % 2 != 0) {
+				playerData.add(new Player(sc.next(), Mark.X));
+			} else if (playerData.size() == 1 && count % 2 != 0) {
 				System.out.println("Enter the Player2 Name : ");
-				player[1].setPlayerName(sc.next());
+				playerData.add(new Player(sc.next(), Mark.O));
 			}
 
 			System.out.print("Enter Position : ");
 			if (count % 2 == 0) {
-				System.out.println(player[0].getPlayerName());
+				player = playerData.get(0);
+				System.out.println(player.getPlayerName());
 			} else {
-				System.out.println(player[1].getPlayerName());
+				player = playerData.get(1);
+				System.out.println(player.getPlayerName());
 			}
 
 			int positionofBoard;
 			try {
 				positionofBoard = sc.nextInt();
-				cs.validate(positionofBoard);
+				cs.validate(positionofBoard, board.getSize());
 			} catch (Exception e) {
 				System.err.println(e);
+				sc.nextLine();
 				continue;
 			}
-
+			game.setPlayer(playerData);
 			count++;
 			game.Play(count, positionofBoard);
 
@@ -83,7 +85,13 @@ public class NewTicTacToeTest {
 			status = game.getStatus();
 
 		}
-		desicion(status, count, player[0].getPlayerName(), player[1].getPlayerName());
+		if (count % 2 == 0) {
+			player = playerData.get(1);
+			desicion(status, count, player.getPlayerName());
+		} else {
+			player = playerData.get(0);
+			desicion(status, count, player.getPlayerName());
+		}
 		sc.close();
 
 	}
@@ -97,13 +105,11 @@ public class NewTicTacToeTest {
 		}
 	}
 
-	public static void desicion(Result winner, int count, String Player1, String Player2) {
+	public static void desicion(Result winner, int count, String player) {
 		if (winner.equals(Result.DRAW))
 			System.out.println("It's a draw! Thanks for playing.");
-		else if (count % 2 == 0)
-			System.out.println(Player2 + "  " + Result.WIN);
 		else
-			System.out.println(Player1 + "  " + Result.WIN);
+			System.out.println(player + "  " + Result.WIN);
 
 	}
 

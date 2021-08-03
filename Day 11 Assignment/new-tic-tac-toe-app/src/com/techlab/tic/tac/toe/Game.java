@@ -1,17 +1,23 @@
 package com.techlab.tic.tac.toe;
 
+import java.util.ArrayList;
+
 public class Game {
 	private Board board;
 	private ResultAnalayzer analyze;
 	private Mark turn;
-	private Player[] player;
+	private ArrayList<Player> playerData;
 	private int moves;
 	private int positionofBoard;
+	private Player player;
 
-	public Game(Player[] player, Board board, ResultAnalayzer analyze) {
-		this.player = player;
+	public Game(Board board, ResultAnalayzer analyze) {
 		this.board = board;
 		this.analyze = analyze;
+	}
+
+	public void setPlayer(ArrayList<Player> playerData) {
+		this.playerData = playerData;
 	}
 
 	public void Play(int count, int positionofBoard) {
@@ -20,14 +26,16 @@ public class Game {
 
 		try {
 			if (moves % 2 != 0) {
-				board.setGrid(player[0].getAssignMark(), positionofBoard);
+				player = playerData.get(0);
+				board.setGrid(player.getAssignMark(), positionofBoard);
 				analyze.setMoves(moves);
-				this.turn = player[0].getAssignMark();
+				this.turn = player.getAssignMark();
 				getStatus();
 			} else {
-				board.setGrid(player[1].getAssignMark(), positionofBoard);
+				player = playerData.get(1);
+				board.setGrid(player.getAssignMark(), positionofBoard);
 				analyze.setMoves(moves);
-				this.turn = player[1].getAssignMark();
+				this.turn = player.getAssignMark();
 				getStatus();
 			}
 		} catch (Exception e) {
@@ -43,6 +51,5 @@ public class Game {
 		}
 		return Result.INPROGRESS;
 	}
-
 
 }
