@@ -17,7 +17,8 @@ public class GameFacade {
 		board = new Board(size);
 		analyze = new ResultAnalayzer(board);
 		playerData = new ArrayList<Player>();
-		game = new Game(board, analyze);
+		// player=playerData;
+		game = new Game(playerData, board, analyze);
 	}
 
 	public Result getStatus() {
@@ -48,7 +49,6 @@ public class GameFacade {
 
 	public void setPlayerData(String playerName, Mark mark) {
 		playerData.add(new Player(playerName, mark));
-		game.setPlayer(playerData);
 	}
 
 	public String getPlayerName() {

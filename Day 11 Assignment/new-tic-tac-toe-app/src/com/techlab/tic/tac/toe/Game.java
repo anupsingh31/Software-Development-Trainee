@@ -11,13 +11,10 @@ public class Game {
 	private int positionofBoard;
 	private Player player;
 
-	public Game(Board board, ResultAnalayzer analyze) {
+	public Game(ArrayList<Player> playerData, Board board, ResultAnalayzer analyze) {
+		this.playerData = playerData;
 		this.board = board;
 		this.analyze = analyze;
-	}
-
-	public void setPlayer(ArrayList<Player> playerData) {
-		this.playerData = playerData;
 	}
 
 	public void Play(int count, int positionofBoard) {
@@ -41,6 +38,7 @@ public class Game {
 		} catch (Exception e) {
 			System.err.println(e);
 			moves--;
+
 		}
 
 	}
